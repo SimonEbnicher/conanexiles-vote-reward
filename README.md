@@ -2,6 +2,9 @@
 Reward voters on conan-exiles.com with ingame items
 
 ## setup
+Prerequisites for these scripts:
+- Python3 (with standard libraries: sqlite3, requests, json, requests)
+- Python3 library for Valve RCON protocol ("pip3 install valve")
 
 ### setup-config.py
 Use this helper script to setup the configuration file. Keep ready the following data.
