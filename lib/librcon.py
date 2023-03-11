@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import valve
+import valve.rcon as rcon
 
 class RCON:
     def __init__(self, address, port, password):
@@ -10,7 +10,7 @@ class RCON:
 
     def get_players_online(self):
         cmd = 'listplayers'
-        resp = valve.rcon.execute(address=(self.address, self.port), password=self.password, command=cmd)
+        resp = rcon.execute(address=(self.address, self.port), password=self.password, command=cmd)
         lines = resp.splitlines()
         players = []
         for line in lines:
@@ -25,7 +25,7 @@ class RCON:
 
     def give_items_to_player(self, playername, itemid, itemcount):
         cmd = 'con {playername} SpawnItem {itemid} {itemcount}'.format(playername=playername, itemid=itemid, itemcount=itemcount)
-        resp = valve.rcon.execute(address=(self.address, self.port), password=self.password, command=cmd)
+        resp = rcon.execute(address=(self.address, self.port), password=self.password, command=cmd)
         #print(str(resp))
         if 'Successfully executed: '+cmd in str(resp):
             return True
@@ -35,7 +35,7 @@ class RCON:
 
     def broadcast(self, message):
         cmd = 'broadcast {message}'.format(message=message)
-        resp = valve.rcon.execute(address=(self.address, self.port), password=self.password, command=cmd)
+        resp = rcon.execute(address=(self.address, self.port), password=self.password, command=cmd)
         #print(str(resp))
         if 'Message has been broadcast' in str(resp):
             return True
@@ -45,7 +45,7 @@ class RCON:
 
     def restart(self):
         cmd = 'restart'
-        resp = valve.rcon.execute(address=(self.address, self.port), password=self.password, command=cmd)
+        resp = rcon.execute(address=(self.address, self.port), password=self.password, command=cmd)
         #print(str(resp))
         if 'Successfully executed: '+cmd in str(resp):
             return True
